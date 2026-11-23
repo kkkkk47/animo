@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FAF8F5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Botón de Rescate & Ánimo ❤️</title>
+
+  <!-- Google Fonts: Fraunces (serif cálida) & Plus Jakarta Sans (sans-serif moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y SISTEMA DE DISEÑO EDITORIAL CÁLIDO
+       ========================================================================== */
+    :root {
+      --bg-canvas: #FAF8F5;          /* Crema suave papel */
+      --bg-card: #FFFFFF;            /* Blanco puro tarjeta */
+      --bg-card-soft: #F4EFEA;       /* Tono arena sutil */
+      --text-main: #1F2421;          /* Carbón suave */
+      --text-muted: #647067;         /* Gris verdoso suave */
+      --text-light: #8E9891;         /* Gris tenue para detalles */
+      
+      --terracotta: #E07A5F;         /* Terracota cálido principal */
+      --terracotta-hover: #CC684F;
+      --terracotta-soft: #FBF0EC;    /* Fondo suave terracota */
+      
+      --sage: #4A7C59;               /* Verde salvia */
+      --sage-hover: #3C6649;
+      --sage-soft: #EEF4F0;          /* Fondo suave salvia */
+      
+      --coral: #F4A261;              /* Coral / ámbar cálido */
+      --coral-soft: #FDF4EC;
+      
+      --border-color: rgba(31, 36, 33, 0.08);
+      --border-focus: rgba(224, 122, 95, 0.4);
+      
+      --shadow-sm: 0 2px 8px rgba(31, 36, 33, 0.04);
+      --shadow-md: 0 8px 24px rgba(31, 36, 33, 0.08);
+      --shadow-lg: 0 16px 36px rgba(31, 36, 33, 0.12);
+      
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      
+      --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100dvh;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: env(safe-area-inset-top, 16px) env(safe-area-inset-right, 16px) calc(env(safe-area-inset-bottom, 20px) + 76px) env(safe-area-inset-left, 16px);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-container {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ==========================================================================
+       1. CABECERA: CUENTA ATRÁS EMOCIONAL HASTA MURCIA
+       ========================================================================== */
+    .hero-countdown-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 20px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s var(--transition-smooth);
+    }
+
+    .top-row-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.02em;
+    }
+
+    .sound-toggle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .sound-toggle-btn:active {
+      transform: scale(0.9);
+      background: var(--terracotta-soft);
+    }
+
+    /* Caja destacada del contador */
+    .countdown-main-box {
+      background: var(--terracotta-soft);
+      border: 1.5px solid rgba(224, 122, 95, 0.28);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      text-align: center;
+      margin-bottom: 14px;
+      box-shadow: inset 0 0 12px rgba(224, 122, 95, 0.06);
+    }
+
+    .countdown-pulse-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .capsule-pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .capsule-pulse::after {
+      content: "";
+      position: absolute;
+      top: -3px; left: -3px; right: -3px; bottom: -3px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      opacity: 0.5;
+      animation: pulseGlow 2s infinite ease-out;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    .countdown-title-tag {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: var(--terracotta);
+    }
+
+    .countdown-digits-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .countdown-highlight {
+      color: var(--terracotta);
+      font-weight: 800;
+    }
+
+    .hero-card-body {
+      text-align: left;
+    }
+
+    .hero-card-body .subtitle {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      font-weight: 700;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hero-card-body h1 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-card-body p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       2. SELECTOR DE BATERÍA MENTAL
+       ========================================================================== */
+    .battery-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    .battery-card .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .battery-card .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .battery-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .battery-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-card-soft);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.25s var(--transition-smooth);
+      position: relative;
+    }
+
+    .battery-btn:active {
+      transform: scale(0.975);
+    }
+
+    .battery-btn.active {
+      background: #FFFFFF;
+      border-color: var(--terracotta);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .battery-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.25s var(--transition-spring);
+    }
+
+    .battery-btn.active .battery-icon-wrap {
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    .battery-btn-info {
+      flex: 1;
+    }
+
+    .battery-btn-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: block;
+    }
+
+    .battery-btn-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+      display: block;
+    }
+
+    .battery-feedback-wrap {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--terracotta-soft);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--terracotta);
+      display: none;
+      animation: fadeInSlide 0.35s ease;
+    }
+
+    .battery-feedback-wrap.active {
+      display: block;
+    }
+
+    .battery-feedback-text {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .battery-feedback-action {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .battery-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta);
+      color: #FFFFFF;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(224, 122, 95, 0.3);
+      transition: all 0.2s;
+    }
+
+    .battery-action-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* ==========================================================================
+       BARRA DE NAVEGACIÓN INFERIOR (TABS MOBILE)
+       ========================================================================== */
+    .tab-nav-bar {
+      position: fixed;
+      bottom: env(safe-area-inset-bottom, 14px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(31, 36, 33, 0.12);
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      transition: all 0.25s var(--transition-smooth);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 1.15rem;
+      transition: transform 0.2s var(--transition-spring);
+    }
+
+    .nav-item.active {
+      color: var(--terracotta);
+      background: var(--terracotta-soft);
+    }
+
+    .nav-item.active .nav-icon {
+      transform: scale(1.15);
+    }
+
+    /* ==========================================================================
+       VISTAS / SECCIONES PRINCIPALES
+       ========================================================================== */
+    .section-view {
+      display: none;
+      animation: fadeInSlide 0.3s ease;
+      width: 100%;
+    }
+
+    .section-view.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       3. MÓDULO: DOSIS DE ÁNIMO
+       ========================================================================== */
+    .cheer-card-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cheer-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .cheer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta-soft);
+      color: var(--terracotta);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.02em;
+    }
+
+    .cheer-counter {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .letter-envelope {
+      background: #FFFDFB;
+      border: 1px dashed rgba(224, 122, 95, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px 18px;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: inset 0 0 16px rgba(250, 248, 245, 0.8);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .letter-envelope.shuffling {
+      transform: scale(0.96) rotate(-1.5deg);
+      opacity: 0.5;
+    }
+
+    .quote-icon {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--terracotta);
+      opacity: 0.35;
+      margin-bottom: -10px;
+    }
+
+    .cheer-message-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text-main);
+      margin: 8px 0;
+    }
+
+    .cheer-author-tag {
+      font-size: 0.82rem;
+      color: var(--terracotta);
+      font-style: italic;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cheer-btn-group {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: var(--terracotta);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 13px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(224, 122, 95, 0.35);
+      transition: all 0.2s var(--transition-smooth);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+      background: var(--terracotta-hover);
+    }
+
+    /* ==========================================================================
+       4. MÓDULO: MINI-PAUSA ANTI-ESTRÉS & MATAR AGOBIOS
+       ========================================================================== */
+    .pause-toggle-wrap {
+      display: flex;
+      background: var(--bg-card-soft);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      margin-bottom: 16px;
+    }
+
+    .pause-toggle-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 9px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pause-toggle-btn.active {
+      background: #FFFFFF;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* --- Submódulo Respiración --- */
+    .breath-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .breath-arena {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px 0 24px;
+    }
+
+    .breath-circle-outer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--sage-soft);
+      transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.7;
+    }
+
+    .breath-circle-inner {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid var(--sage);
+      box-shadow: 0 4px 20px rgba(74, 124, 89, 0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      z-index: 2;
+      transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .breath-arena.inhale .breath-circle-outer {
+      transform: scale(1.15);
+      background: #E0EFE6;
+      transition-duration: 4s;
+    }
+
+    .breath-arena.inhale .breath-circle-inner {
+      transform: scale(1.12);
+      transition-duration: 4s;
+    }
+
+    .breath-arena.hold .breath-circle-outer,
+    .breath-arena.hold .breath-circle-inner {
+      transition-duration: 2s;
+    }
+
+    .breath-arena.exhale .breath-circle-outer {
+      transform: scale(0.85);
+      background: var(--sage-soft);
+      transition-duration: 4s;
+    }
+
+    .breath-arena.exhale .breath-circle-inner {
+      transform: scale(0.9);
+      transition-duration: 4s;
+    }
+
+    .breath-phase-text {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sage);
+    }
+
+    .breath-timer-count {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .breath-cycle-indicator {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .cycle-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-color);
+      transition: background 0.3s;
+    }
+
+    .cycle-dot.completed {
+      background: var(--sage);
+    }
+
+    .cycle-dot.current {
+      background: var(--terracotta);
+      transform: scale(1.2);
+    }
+
+    /* --- Submódulo Selección de Agobios --- */
+    .game-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 16px;
+      box-shadow: var(--shadow-md);
+      display: none;
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .game-counter {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      background: var(--terracotta-soft);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .stress-creator-box {
+      background: #FAF8F6;
+      border: 1px dashed rgba(224, 122, 95, 0.4);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .stress-input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .stress-input-group input {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 9px 14px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .stress-input-group input:focus {
+      border-color: var(--terracotta);
+    }
+
+    .btn-add-stress {
+      background: var(--terracotta);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-add-stress:active {
+      transform: scale(0.95);
+    }
+
+    .stress-input-hint {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      padding-left: 4px;
+    }
+
+    .bubbles-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 6px 2px 14px;
+      min-height: 180px;
+      align-content: flex-start;
+    }
+
+    .stress-bubble {
+      background: var(--bg-card-soft);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 9px 15px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: all 0.2s ease;
+    }
+
+    .stress-bubble:active {
+      transform: scale(0.94);
+      background: #FDF2E9;
+      border-color: var(--terracotta);
+    }
+
+    .bubble-badge-fight {
+      background: var(--terracotta-soft);
+      color: var(--terracotta);
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+
+    /* ==========================================================================
+       PANTALLA DE COMBATE CONTRA EL AGOBIO (BOSS FIGHT FLOTANTE)
+       ========================================================================== */
+    .battle-arena-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #FFF8F3 0%, #F5ECE3 100%);
+      z-index: 1000;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .battle-arena-modal.active {
+      display: flex;
+      animation: battleOpen 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    @keyframes battleOpen {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .battle-top-bar {
+      padding: env(safe-area-inset-top, 16px) 16px 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      z-index: 10;
+    }
+
+    .battle-close-btn {
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .battle-close-btn:active {
+      transform: scale(0.92);
+    }
+
+    .battle-hp-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .battle-target-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .battle-target-name {
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .battle-hp-count {
+      color: var(--terracotta);
+      font-size: 0.78rem;
+    }
+
+    .battle-hp-bar-track {
+      width: 100%;
+      height: 10px;
+      background: #EAE3D9;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .battle-hp-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #4A7C59, #E07A5F);
+      border-radius: var(--radius-full);
+      transition: width 0.15s ease-out, background 0.3s;
+    }
+
+    .battle-instruction-hint {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      background: #FDF4EC;
+      padding: 6px 12px;
+      border-bottom: 1px dashed rgba(224, 122, 95, 0.3);
+      animation: pulseText 1.5s infinite ease-in-out;
+      z-index: 5;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; transform: scale(1.01); }
+    }
+
+    .battle-field {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .floating-stress-monster {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #FEE8E1 50%, #E07A5F 100%);
+      border: 3px solid #CC684F;
+      box-shadow: 0 12px 28px rgba(224, 122, 95, 0.35), inset 0 2px 6px rgba(255,255,255,0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      touch-action: none;
+      transform-origin: center center;
+      will-change: transform, left, top;
+    }
+
+    .floating-stress-monster:active {
+      transform: scale(0.92);
+    }
+
+    .monster-face {
+      font-size: 2.3rem;
+      line-height: 1;
+      margin-bottom: 4px;
+      pointer-events: none;
+      transition: transform 0.15s;
+    }
+
+    .monster-text {
+      font-family: var(--font-serif);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #1F2421;
+      line-height: 1.25;
+      pointer-events: none;
+      max-width: 120px;
+      word-break: break-word;
+    }
+
+    .floating-stress-monster.hit-recoil {
+      animation: monsterRecoil 0.18s cubic-bezier(0.1, 0.9, 0.2, 1);
+      filter: brightness(1.3) saturate(1.4);
+    }
+
+    @keyframes monsterRecoil {
+      0% { transform: scale(1.18) rotate(-6deg); }
+      50% { transform: scale(0.88) rotate(6deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .floating-stress-monster.dying {
+      animation: monsterDeath 0.45s forwards cubic-bezier(0.1, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+
+    @keyframes monsterDeath {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5) rotate(15deg); opacity: 0.8; filter: brightness(2); }
+      100% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    }
+
+    .damage-hit-splash {
+      position: absolute;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--terracotta);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 0 10px #FFFFFF;
+      pointer-events: none;
+      z-index: 50;
+      animation: floatDamage 0.6s forwards cubic-bezier(0.2, 0.8, 0.3, 1);
+    }
+
+    @keyframes floatDamage {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.7) rotate(0deg); }
+      40% { transform: translate(-50%, -90px) scale(1.3) rotate(-8deg); opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -130px) scale(1.1) rotate(6deg); }
+    }
+
+    .battle-victory-overlay {
+      display: none;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(250, 248, 245, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .battle-victory-overlay.active {
+      display: flex;
+      animation: fadeInSlide 0.35s ease;
+    }
+
+    .victory-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      box-shadow: var(--shadow-lg);
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .victory-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 8px;
+      animation: bounceTrophy 1s ease infinite alternate;
+    }
+
+    .victory-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .victory-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .victory-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       5. POMODORO EXPRESS
+       ========================================================================== */
+    .pomodoro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .pomodoro-presets {
+      display: inline-flex;
+      background: var(--bg-card-soft);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      margin-bottom: 20px;
+    }
+
+    .preset-btn {
+      border: none;
+      background: transparent;
+      padding: 7px 18px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn.active {
+      background: #FFFFFF;
+      color: var(--terracotta);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timer-ring-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .timer-circle-bg {
+      fill: none;
+      stroke: var(--bg-card-soft);
+      stroke-width: 8;
+    }
+
+    .timer-circle-progress {
+      fill: none;
+      stroke: var(--terracotta);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 565.48;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .timer-time-display {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-digits {
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .timer-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .pomodoro-quote {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      padding: 0 10px;
+      line-height: 1.45;
+    }
+
+    .pomodoro-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card-soft);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.96);
+    }
+
+    /* ==========================================================================
+       6. MÓDULO: VALES DE RESCATE
+       ========================================================================== */
+    .vouchers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .voucher-ticket {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      position: relative;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .voucher-ticket:active {
+      transform: scale(0.99);
+    }
+
+    .ticket-body {
+      padding: 18px 18px 14px;
+      position: relative;
+    }
+
+    .ticket-type {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: var(--terracotta);
+      margin-bottom: 4px;
+    }
+
+    .ticket-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .ticket-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .ticket-divider {
+      position: relative;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      margin: 2px 0;
+    }
+
+    .ticket-divider::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      border-top: 2px dashed rgba(31, 36, 33, 0.12);
+    }
+
+    .ticket-notch-left,
+    .ticket-notch-right {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--bg-canvas);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .ticket-notch-left {
+      left: -8px;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .ticket-notch-right {
+      right: -8px;
+      border-left: 1px solid var(--border-color);
+    }
+
+    .ticket-footer {
+      padding: 10px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #FAFAFA;
+    }
+
+    .ticket-meta {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .redeem-btn {
+      background: var(--terracotta);
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .redeem-btn:active {
+      transform: scale(0.95);
+    }
+
+    .voucher-ticket.redeemed {
+      background: #FAF8F6;
+      border-color: rgba(224, 122, 95, 0.3);
+    }
+
+    .voucher-ticket.redeemed .redeem-btn {
+      background: var(--sage);
+      pointer-events: none;
+    }
+
+    .stamp-badge {
+      display: none;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 5px 12px;
+      border: 2px solid var(--terracotta);
+      border-radius: 8px;
+      color: var(--terracotta);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transform: rotate(7deg);
+      background: rgba(251, 240, 236, 0.95);
+      box-shadow: 0 2px 8px rgba(224, 122, 95, 0.2);
+    }
+
+    .voucher-ticket.redeemed .stamp-badge {
+      display: block;
+      animation: stampIn 0.35s var(--transition-spring);
+    }
+
+    @keyframes stampIn {
+      0% { transform: scale(1.6) rotate(20deg); opacity: 0; }
+      100% { transform: scale(1) rotate(7deg); opacity: 1; }
+    }
+
+    /* Canvas Confeti */
+    #confettiCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .app-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      padding: 16px 0 6px;
+    }
+
+    @media (max-width: 360px) {
+      .hero-card-body h1 { font-size: 1.4rem; }
+      .countdown-digits-text { font-size: 1.1rem; }
+      .timer-digits { font-size: 2.2rem; }
+      .timer-ring-container { width: 170px; height: 170px; }
+      .breath-arena { width: 190px; height: 190px; }
+      .floating-stress-monster { width: 130px; height: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lienzo para confeti nativo de celebración -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <main class="app-container">
+    
+    <!-- ====================================================================
+         1. CABECERA: CUENTA ATRÁS EMOCIONAL HASTA MURCIA (SIN FOTO)
+         ==================================================================== -->
+    <header class="hero-countdown-card">
+      <div class="top-row-controls">
+        <span class="location-badge">
+          <span>📍</span> Murcia · 11 Diciembre 2026
+        </span>
+        <button class="sound-toggle-btn" id="soundToggleBtn" aria-label="Activar/Desactivar sonido" title="Sonido activado">
+          <span id="soundIcon">🔊</span>
+        </button>
+      </div>
+
+      <!-- Caja protagonista de la cuenta atrás -->
+      <div class="countdown-main-box" id="countdownCapsule" title="Fecha exacta de reencuentro">
+        <div class="countdown-pulse-wrap">
+          <span class="capsule-pulse"></span>
+          <span class="countdown-title-tag">Cuenta atrás para nuestro reencuentro</span>
+        </div>
+        <div class="countdown-digits-text" id="countdownLabel">Calculando tiempo...</div>
+      </div>
+
+      <div class="hero-card-body">
+        <div class="subtitle">
+          <span>✨</span>
+          <span>Nuestro rincón de rescate · 2026</span>
+        </div>
+        <!-- // EDITAR AQUÍ: NOMBRE DE TU CHICA -->
+        <h1 id="heroTitle">Para mi chica favorita ❤️</h1>
+        <p>Cada minuto de estudio es un minuto menos para volver a abrazarnos.</p>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         2. SELECTOR: ¿CÓMO VA ESA BATERÍA MENTAL?
+         ==================================================================== -->
+    <section class="battery-card" id="batterySection">
+      <h2 class="card-title">¿Cómo va esa cabeza ahora mismo? 🧠</h2>
+      <p class="card-subtitle">Toca una opción sin juzgarte; aquí no hay que hacerse la fuerte:</p>
+
+      <div class="battery-grid">
+        <button class="battery-btn" data-status="saturated">
+          <div class="battery-icon-wrap">🪫</div>
+          <div class="battery-btn-info">
+            <span class="battery-btn-title">Saturada total</span>
+            <span class="battery-btn-desc">No entra ni media palabra más de temario.</span>
+          </div>
+        </button>
+
+        <button class="battery-btn" data-status="push">
+          <div class="battery-icon-wrap">⚡</div>
+          <div class="battery-btn-info">
+            <span class="battery-btn-title">Me falta un empujón</span>
+            <span class="battery-btn-desc">Cansada pero con ganas de tachar el día.</span>
+          </div>
+        </button>
+
+        <button class="battery-btn" data-status="reset">
+          <div class="battery-icon-wrap">🥊</div>
+          <div class="battery-btn-info">
+            <span class="battery-btn-title">Necesito desconectar ya</span>
+            <span class="battery-btn-desc">Elegir un agobio y reventarlo a golpes.</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="battery-feedback-wrap" id="batteryFeedback">
+        <p class="battery-feedback-text" id="batteryFeedbackText"></p>
+        <div class="battery-feedback-action">
+          <button class="battery-action-btn" id="batteryActionBtn">
+            <span id="batteryActionText">Hacer esto ahora</span> ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIONES PRINCIPALES (CONTROLADAS POR PESTAÑAS)
+         ==================================================================== -->
+
+    <!-- VISTA 1: DOSIS DE ÁNIMO -->
+    <section class="section-view" id="view-cheer">
+      <div class="cheer-card-container">
+        <div class="cheer-card-header">
+          <span class="cheer-badge">💌 Dosis de confianza</span>
+          <span class="cheer-counter" id="cheerProgress">1 / 18</span>
+        </div>
+
+        <div class="letter-envelope" id="letterEnvelope">
+          <span class="quote-icon">“</span>
+          <p class="cheer-message-text" id="cheerText">Cargando motivo para confiar en ti...</p>
+          <span class="cheer-author-tag">
+            <!-- // EDITAR AQUÍ: TU FIRMA / NOMBRE -->
+            — Tu novio, tu mayor fan nº 1
+          </span>
+        </div>
+
+        <div class="cheer-btn-group">
+          <button class="btn-primary" id="nextCheerBtn">
+            <span>Dame otra dosis</span> ✨
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 2: PAUSA ACTIVA & MATAR AGOBIOS -->
+    <section class="section-view" id="view-pause">
+      <div class="pause-toggle-wrap">
+        <button class="pause-toggle-btn active" id="btnTabBreathing">🫧 Respiración 30s</button>
+        <button class="pause-toggle-btn" id="btnTabGame">🥊 Matar agobios</button>
+      </div>
+
+      <!-- Subvista A: Respiración guiada -->
+      <div class="breath-box" id="boxBreathing">
+        <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 2px;">Burbuja de calma</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Sigue el ritmo del círculo durante 3 respiraciones profundas:</p>
+
+        <div class="breath-arena" id="breathArena">
+          <div class="breath-circle-outer"></div>
+          <div class="breath-circle-inner">
+            <span class="breath-phase-text" id="breathPhase">Preparada</span>
+            <span class="breath-timer-count" id="breathCount">Pulsa empezar</span>
+          </div>
+        </div>
+
+        <div class="breath-cycle-indicator">
+          <span class="cycle-dot current" id="dotCycle1"></span>
+          <span class="cycle-dot" id="dotCycle2"></span>
+          <span class="cycle-dot" id="dotCycle3"></span>
+        </div>
+
+        <div style="display: flex; gap: 10px; width: 100%;">
+          <button class="btn-primary" id="startBreathBtn" style="flex: 2;">
+            <span>Empezar respiración</span> 🌿
+          </button>
+          <button class="btn-secondary" id="skipBreathBtn" style="flex: 1;">
+            Omitir
+          </button>
+        </div>
+      </div>
+
+      <!-- Subvista B: Selección y Creación de Agobios para combatir -->
+      <div class="game-box" id="boxGame">
+        <div class="game-header">
+          <div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--text-main);">Elige qué agobio matar 🥊</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Toca uno o escribe el tuyo para luchar contra él:</p>
+          </div>
+          <span class="game-counter" id="gameCounter">15 agobios</span>
+        </div>
+
+        <!-- Creador de agobios para combatir -->
+        <div class="stress-creator-box">
+          <div class="stress-input-group">
+            <input type="text" id="customStressInput" placeholder="Escribe aquí tu agobio (ej. Subjuntivo gabacho)..." maxlength="35" autocomplete="off" />
+            <button id="addCustomStressBtn" class="btn-add-stress">
+              <span>¡Luchar!</span> 🥊
+            </button>
+          </div>
+          <span class="stress-input-hint">💡 Toca cualquier agobio para abrir la arena de combate y reventarlo a golpes.</span>
+        </div>
+
+        <div class="bubbles-cloud" id="bubblesCloud">
+          <!-- Burbujas que inician el combate al tocarlas -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 3: POMODORO EXPRESS -->
+    <section class="section-view" id="view-pomodoro">
+      <div class="pomodoro-card">
+        <h2 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 4px;">Un bloque más juntos ⏱️</h2>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">
+          Solo este bloque de concentración. Luego, descanso merecido.
+        </p>
+
+        <div class="pomodoro-presets">
+          <button class="preset-btn active" data-minutes="25">25 min (Clásico)</button>
+          <button class="preset-btn" data-minutes="15">15 min (Express)</button>
+        </div>
+
+        <div class="timer-ring-container">
+          <svg class="timer-svg" viewBox="0 0 200 200">
+            <circle class="timer-circle-bg" cx="100" cy="100" r="90"></circle>
+            <circle class="timer-circle-progress" id="timerProgressCircle" cx="100" cy="100" r="90"></circle>
+          </svg>
+          <div class="timer-time-display">
+            <span class="timer-digits" id="timerDigits">25:00</span>
+            <span class="timer-label" id="timerStatusLabel">A tu ritmo</span>
+          </div>
+        </div>
+
+        <p class="pomodoro-quote" id="pomodoroQuote">
+          Dale al play, ponte música tranquila y yo me quedo aquí contigo en la distancia.
+        </p>
+
+        <div class="pomodoro-controls">
+          <button class="btn-primary" id="btnTimerToggle" style="min-width: 140px;">
+            <span id="btnTimerToggleText">Empezar</span> ▶
+          </button>
+          <button class="btn-secondary" id="btnTimerReset">
+            Reiniciar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 4: VALES DE RESCATE -->
+    <section class="section-view" id="view-vouchers">
+      <div style="margin-bottom: 12px; padding: 0 4px;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.25rem;">Tus Vales de Rescate 🎟️</h2>
+        <p style="font-size: 0.84rem; color: var(--text-muted);">
+          Canjeables en cualquier momento. Al pulsar se sellan para que hagas captura y me la mandes:
+        </p>
+      </div>
+
+      <div class="vouchers-list" id="vouchersList">
+        <!-- Renderizado dinámicamente -->
+      </div>
+
+      <div style="text-align: center; margin-top: 16px;">
+        <button id="resetVouchersBtn" style="background: none; border: none; font-size: 0.76rem; color: var(--text-light); text-decoration: underline; cursor: pointer; padding: 6px 12px;">
+          ↺ Restablecer vales (para pruebas)
+        </button>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Hecho con todo el cariño del mundo para que nunca se te olvide lo capaz que eres.</p>
+    </footer>
+
+  </main>
+
+  <!-- ====================================================================
+       ARENA DE COMBATE: PANTALLA COMPLETA PARA MATAR EL AGOBIO A GOLPES
+       ==================================================================== -->
+  <div id="battleArenaModal" class="battle-arena-modal" aria-hidden="true">
+    <div class="battle-top-bar">
+      <button id="closeBattleBtn" class="battle-close-btn">✕ Salir</button>
+      <div class="battle-hp-container">
+        <div class="battle-target-info">
+          <span class="battle-target-name" id="battleTargetName">El C1 de gabacho</span>
+          <span class="battle-hp-count" id="battleHpCount">7 / 7 golpes</span>
+        </div>
+        <div class="battle-hp-bar-track">
+          <div class="battle-hp-bar-fill" id="battleHpBarFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="battle-instruction-hint" id="battleInstructionHint">
+      👇 ¡Golpea al agobio repetidamente hasta que muera! 👇
+    </div>
+
+    <div class="battle-field" id="battleField">
+      <!-- El agobio flotante que se mueve por la pantalla -->
+      <div class="floating-stress-monster" id="floatingMonster">
+        <div class="monster-face" id="monsterFace">😈</div>
+        <div class="monster-text" id="monsterText">El C1 de gabacho</div>
+      </div>
+    </div>
+
+    <!-- Pantalla de victoria al aniquilar el agobio -->
+    <div class="battle-victory-overlay" id="battleVictoryOverlay">
+      <div class="victory-card">
+        <div class="victory-emoji">☠️💥</div>
+        <h3 class="victory-title">¡Agobio Aniquilado!</h3>
+        <p class="victory-desc" id="battleVictoryDesc">
+          Te has cargado este agobio a base de carácter e insistencia. Tu constancia puede con todo.
+        </p>
+        <div class="victory-actions">
+          <button class="btn-primary" id="btnNextFight">
+            <span>Elegir otro agobio</span> 🥊
+          </button>
+          <button class="btn-secondary" id="btnFinishFight">
+            Volver al estudio 🌿
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       BARRA DE NAVEGACIÓN INFERIOR (TABS MOBILE)
+       ==================================================================== -->
+  <nav class="tab-nav-bar" aria-label="Navegación principal">
+    <button class="nav-item active" data-target="view-battery">
+      <span class="nav-icon">🔋</span>
+      <span>Batería</span>
+    </button>
+    <button class="nav-item" data-target="view-cheer">
+      <span class="nav-icon">💌</span>
+      <span>Ánimo</span>
+    </button>
+    <button class="nav-item" data-target="view-pause">
+      <span class="nav-icon">🫧</span>
+      <span>Pausa</span>
+    </button>
+    <button class="nav-item" data-target="view-pomodoro">
+      <span class="nav-icon">⏱️</span>
+      <span>Foco</span>
+    </button>
+    <button class="nav-item" data-target="view-vouchers">
+      <span class="nav-icon">🎟️</span>
+      <span>Vales</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       JAVASCRIPT PURO
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       CONFIGURACIÓN PERSONALIZABLE // EDITAR AQUÍ
+       ========================================================================== */
+
+    // 1. FECHA EXACTA DE ENCUENTRO EN MURCIA (ISO-8601 con zona horaria Europe/Madrid)
+    // EDITAR HORA EXACTA DE LLEGADA AQUÍ (Año-Mes-DíaTHora:Minuto:Segundo+01:00)
+    const TARGET_DATE_STRING = "2026-12-11T12:00:00+01:00";
+    const TARGET_DESTINATION = "Murcia";
+
+    // 2. NOMBRES / APODOS PERSONALIZABLES
+    const GIRLFRIEND_NAME = "mi chica favorita"; // EDITAR: Ej. "Lorena", "Elena", "mi amor"
+    const BOYFRIEND_NAME = "tu novio";           // EDITAR: Ej. "Paco", "Carlos"
+
+    // 3. ARRAY DE MENSAJES Y MOTIVOS PARA CONFIAR EN TI (Enfocados en reencuentro, C1 de gabacho y esfuerzo)
+    const CHEER_MESSAGES = [
+      "Piensa en el reencuentro del 11 de diciembre en Murcia: ese primer abrazo en el que todo el cansancio de estas semanas se va a evaporar en medio segundo.",
+      "Cuando te saques el C1 de gabacho, vamos a brindar como se merece. Que tiemble Francia entera, que va mi chica con todo.",
+      "La satisfacción de mirar atrás cuando lo tengas en la mano y decir 'lo he conseguido por mis narices' no te la va a quitar nadie. Y estás a nada.",
+      "Tienes una fuerza de voluntad y una cabeza que a mí me dejan flipado cada día. Si alguien puede con este temario y con el francés a la vez, eres tú.",
+      "Visualízate el 11 de diciembre: sin libros, sin alarmas, paseando juntos por Murcia y con la paz mental de haberlo dado absolutamente todo.",
+      "El francés podrá tener mil excepciones y fonética de locos, pero tu constancia es diez veces más cabezona que cualquier idioma.",
+      "Dato 100% verificado: siempre que te propones algo, lo consigues. Siempre. Que hoy estés cansada no cambia lo imparable que eres.",
+      "Acuérdate de por qué empezaste y de lo orgullosa que vas a estar cuando cierres esta etapa. Yo ya estoy orgulloso ahora mismo.",
+      "Imagínate ese momento en Murcia: los dos tranquilos, riéndonos de todo este estrés y disfrutando de cada segundo juntos.",
+      "Estás echando un esfuerzo bestial, incluso los días que crees que no avanzas. Cada hora cuenta y cada repasito te acerca a la meta.",
+      "Nivel de gabacho: futura bilingüe con estilazo. Nivel de mi amor por ti: fuera de escala. Dale un empujón más hoy.",
+      "Si hoy el subjuntivo, los verbos o los apuntes te saturan, para 5 minutos. No tienes que comerte el mundo en una tarde, con sumar un poquito basta.",
+      "Tu esfuerzo constante vale oro. Hay gente que tiene suerte puntual, pero lo tuyo es disciplina y talento real, y eso da resultados sí o sí.",
+      "El 11 de diciembre está a la vuelta de la esquina. Ya casi oigo las risas de cuando estemos juntos. Mantén el foco que ya queda nada.",
+      "Cuando tengas ese C1 de gabacho en el bolsillo, nos acordaremos de estas tardes de biblioteca y nos parecerá una anécdota lejana.",
+      "Para un momento, baja los hombros, relaja la mandíbula y respira. Estás haciéndolo increíblemente bien, te lo juro.",
+      "No te compares con nadie: tú tienes tu propio ritmo, tu propia meta y una cabeza brillante que puede con esto y con diez veces más.",
+      "Un beso gigante de recarga exprés en la frente. Venga, valiente, que el reencuentro en Murcia y ese C1 son nuestros."
+    ];
+
+    // 4. ETIQUETAS PREDETERMINADAS DE AGOBIOS
+    const DEFAULT_STRESS_LABELS = [
+      "🇫🇷 El C1 de gabacho",
+      "📚 Temario que no acaba",
+      "☕ Café que ya no hace nada",
+      "🥱 Sueño acumulado",
+      "🧠 Bloqueo mental",
+      "🤯 Gramática y excepciones",
+      "🔥 Ganas de quemar folios",
+      "⚖️ Artículos imposibles",
+      "📉 La curva del olvido",
+      "😫 Dolor de espalda y cuello",
+      "🤷‍♀️ Síndrome de la impostora",
+      "⏳ El reloj que vuela",
+      "🛑 Cero vida social",
+      "🔁 Repasar por enésima vez",
+      "💬 Dudar de si me lo sé"
+    ];
+
+    // 5. VALES DE RESCATE PERSONALIZABLES (Incluye vale por rasca en nuestro libro)
+    const RESCUE_VOUCHERS = [
+      {
+        id: "voucher-rasca-libro",
+        type: "Nuestro Libro de Aventuras",
+        title: "Vale por un rasca en nuestro libro 📖✨",
+        desc: "Canjeable cuando tú quieras: nos sentamos juntos, sacamos nuestro libro, rascas la casilla sorpresa que más te apetezca y lo hacemos sin rechistar.",
+        code: "RASCA-LIBRO"
+      },
+      {
+        id: "voucher-murcia-plan",
+        type: "Plan VIP Murcia",
+        title: "Elegir plan absoluto sin rechistar",
+        desc: "Válido para nuestro reencuentro el finde del 11 de diciembre. Tú eliges qué comemos, qué vemos y qué hacemos los dos días sin quejas.",
+        code: "MURCIA-11DIC"
+      },
+      {
+        id: "voucher-call-rant",
+        type: "Antídoto Anti-Agobio",
+        title: "15 min de desahogo libre por teléfono",
+        desc: "Llamada urgente para quejarte del temario, del francés y del mundo. Regla estricta: prohibido darte soluciones lógicas, solo darte la razón.",
+        code: "RANT-FREE-15"
+      },
+      {
+        id: "voucher-massage-dinner",
+        type: "Recompensa física",
+        title: "Masaje de hombros & cena rica a mesa puesta",
+        desc: "Sesión intensiva para descontracturar cuello y espalda tras tantas horas de estudio, con tu cena favorita servida sin que muevas un dedo.",
+        code: "MASSAGE-CHEF"
+      }
+    ];
+
+    /* ==========================================================================
+       MOTOR DE AUDIO NATIVO (WEB AUDIO API)
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playPop() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const now = this.ctx.currentTime;
+          
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(820, now + 0.08);
+
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } catch (e) {}
+      }
+
+      playPunch() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        try {
+          const now = this.ctx.currentTime;
+          
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(40, now + 0.12);
+
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.13);
+
+          const slap = this.ctx.createOscillator();
+          const slapGain = this.ctx.createGain();
+          slap.type = "square";
+          slap.frequency.setValueAtTime(320, now);
+          slap.frequency.exponentialRampToValueAtTime(120, now + 0.07);
+
+          slapGain.gain.setValueAtTime(0.15, now);
+          slapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+          slap.connect(slapGain);
+          slapGain.connect(this.ctx.destination);
+          slap.start(now);
+          slap.stop(now + 0.08);
+        } catch (e) {}
+      }
+
+      playChime() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        try {
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            const now = this.ctx.currentTime + idx * 0.09;
+
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(freq, now);
+
+            gain.gain.setValueAtTime(0.18, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.55);
+          });
+        } catch (e) {}
+      }
+
+      toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    function triggerHaptic(pattern = 25) {
+      if ("vibrate" in navigator) {
+        try { navigator.vibrate(pattern); } catch(e) {}
+      }
+    }
+
+    /* ==========================================================================
+       MOTOR DE CONFETI NATIVO EN CANVAS
+       ========================================================================== */
+    class ConfettiManager {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.animationId = null;
+        this.colors = ['#E07A5F', '#4A7C59', '#F4A261', '#E76F51', '#2A9D8F', '#FAF0CA'];
+        
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      burst(count = 70) {
+        this.resize();
+        const originX = this.canvas.width / 2;
+        const originY = this.canvas.height * 0.45;
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 4 + Math.random() * 8;
+          this.particles.push({
+            x: originX,
+            y: originY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 3,
+            size: 6 + Math.random() * 6,
+            color: this.colors[Math.floor(Math.random() * this.colors.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 8,
+            gravity: 0.22,
+            life: 1,
+            decay: 0.012 + Math.random() * 0.01
+          });
+        }
+
+        if (!this.animationId) {
+          this.render();
+        }
+      }
+
+      render() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.rotation += p.rotationSpeed;
+          p.life -= p.decay;
+
+          if (p.life <= 0) {
+            this.particles.splice(i, 1);
+            continue;
+          }
+
+          this.ctx.save();
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate((p.rotation * Math.PI) / 180);
+          this.ctx.globalAlpha = Math.max(0, p.life);
+          this.ctx.fillStyle = p.color;
+          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+          this.ctx.restore();
+        }
+
+        if (this.particles.length > 0) {
+          this.animationId = requestAnimationFrame(() => this.render());
+        } else {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.animationId = null;
+        }
+      }
+    }
+
+    const confetti = new ConfettiManager('confettiCanvas');
+
+    /* ==========================================================================
+       1. CUENTA ATRÁS DINÁMICA HASTA EL REENCUENTRO
+       ========================================================================== */
+    function initCountdown() {
+      const countdownLabel = document.getElementById('countdownLabel');
+      const targetTime = new Date(TARGET_DATE_STRING).getTime();
+
+      function update() {
+        const now = new Date().getTime();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+          countdownLabel.innerHTML = `🎉 ¡Ya estamos en <span class="countdown-highlight">${TARGET_DESTINATION}</span>!`;
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        countdownLabel.innerHTML = `Faltan <span class="countdown-highlight">${days} días, ${hours}h y ${minutes}m</span> para vernos en ${TARGET_DESTINATION} 🍊`;
+      }
+
+      update();
+      setInterval(update, 30000);
+    }
+
+    /* ==========================================================================
+       2. CONTROLADOR DE BATERÍA MENTAL
+       ========================================================================== */
+    const batteryResponses = {
+      saturated: {
+        text: "Tranquila mi amor. El mundo no se acaba por parar 5 minutos, y con la cabeza saturada el temario no entra. Apoya el boli, no te sientas culpable y hagamos una mini-pausa juntos.",
+        actionText: "Hacer pausa de respiración",
+        targetView: "view-pause",
+        subMode: "breathing"
+      },
+      push: {
+        text: "Estás mucho más cerca de lo que crees. El C1 de gabacho y este temario tienen los días contados. Recuerda que no necesitas hacerlo perfecto, solo necesitas seguir sumando paso a paso.",
+        actionText: "Ver dosis de confianza",
+        targetView: "view-cheer",
+        subMode: null
+      },
+      reset: {
+        text: "Toca mandar el temario y el francés a paseo. Elige el agobio que más te esté fastidiando ahora mismo y vamos a reventarlo a golpes en la pantalla.",
+        actionText: "Ir a matar agobios",
+        targetView: "view-pause",
+        subMode: "game"
+      }
+    };
+
+    function initBattery() {
+      const buttons = document.querySelectorAll('.battery-btn');
+      const feedbackWrap = document.getElementById('batteryFeedback');
+      const feedbackText = document.getElementById('batteryFeedbackText');
+      const actionBtn = document.getElementById('batteryActionBtn');
+      const actionText = document.getElementById('batteryActionText');
+
+      let currentResponse = null;
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          sound.playPop();
+          triggerHaptic(25);
+
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const status = btn.dataset.status;
+          currentResponse = batteryResponses[status];
+
+          feedbackText.textContent = currentResponse.text;
+          actionText.textContent = currentResponse.actionText;
+          feedbackWrap.classList.add('active');
+        });
+      });
+
+      actionBtn.addEventListener('click', () => {
+        if (!currentResponse) return;
+        sound.playPop();
+        triggerHaptic(20);
+
+        switchView(currentResponse.targetView);
+
+        if (currentResponse.subMode === 'breathing') {
+          activatePauseTab('breathing');
+        } else if (currentResponse.subMode === 'game') {
+          activatePauseTab('game');
+        }
+      });
+    }
+
+    /* ==========================================================================
+       3. DOSIS DE ÁNIMO (BARAJA ALEATORIA SIN REPETIR)
+       ========================================================================== */
+    class CheerDeck {
+      constructor(messages) {
+        this.allMessages = [...messages];
+        this.deck = [];
+        this.currentIndex = 0;
+        this.shuffle();
+
+        this.textEl = document.getElementById('cheerText');
+        this.counterEl = document.getElementById('cheerProgress');
+        this.envelopeEl = document.getElementById('letterEnvelope');
+        this.nextBtn = document.getElementById('nextCheerBtn');
+
+        this.nextBtn.addEventListener('click', () => this.drawNext());
+        this.displayCurrent();
+      }
+
+      shuffle() {
+        this.deck = [...this.allMessages];
+        for (let i = this.deck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+        }
+        this.currentIndex = 0;
+      }
+
+      drawNext() {
+        sound.playPop();
+        triggerHaptic(20);
+
+        this.envelopeEl.classList.add('shuffling');
+
+        setTimeout(() => {
+          this.currentIndex++;
+          if (this.currentIndex >= this.deck.length) {
+            this.shuffle();
+            confetti.burst(30);
+          }
+          this.displayCurrent();
+          this.envelopeEl.classList.remove('shuffling');
+        }, 180);
+      }
+
+      displayCurrent() {
+        this.textEl.textContent = this.deck[this.currentIndex];
+        this.counterEl.textContent = `${this.currentIndex + 1} / ${this.deck.length}`;
+      }
+    }
+
+    /* ==========================================================================
+       4. MINI-PAUSA ANTI-ESTRÉS: RESPIRACIÓN
+       ========================================================================== */
+    function activatePauseTab(tab) {
+      const btnBreathing = document.getElementById('btnTabBreathing');
+      const btnGame = document.getElementById('btnTabGame');
+      const boxBreathing = document.getElementById('boxBreathing');
+      const boxGame = document.getElementById('boxGame');
+
+      if (tab === 'breathing') {
+        btnBreathing.classList.add('active');
+        btnGame.classList.remove('active');
+        boxBreathing.style.display = 'flex';
+        boxGame.style.display = 'none';
+      } else {
+        btnBreathing.classList.remove('active');
+        btnGame.classList.add('active');
+        boxBreathing.style.display = 'none';
+        boxGame.style.display = 'block';
+      }
+    }
+
+    class BreathingGuide {
+      constructor() {
+        this.arena = document.getElementById('breathArena');
+        this.phaseEl = document.getElementById('breathPhase');
+        this.countEl = document.getElementById('breathCount');
+        this.startBtn = document.getElementById('startBreathBtn');
+        this.skipBtn = document.getElementById('skipBreathBtn');
+        this.dots = [
+          document.getElementById('dotCycle1'),
+          document.getElementById('dotCycle2'),
+          document.getElementById('dotCycle3')
+        ];
+
+        this.isRunning = false;
+        this.currentCycle = 0;
+        this.totalCycles = 3;
+
+        this.startBtn.addEventListener('click', () => this.toggle());
+        this.skipBtn.addEventListener('click', () => this.reset());
+      }
+
+      toggle() {
+        if (this.isRunning) {
+          this.reset();
+        } else {
+          this.start();
+        }
+      }
+
+      start() {
+        sound.init();
+        this.isRunning = true;
+        this.currentCycle = 1;
+        this.startBtn.innerHTML = '<span>Pausar respiración</span> ⏸';
+        this.runCycle();
+      }
+
+      runCycle() {
+        if (!this.isRunning) return;
+
+        if (this.currentCycle > this.totalCycles) {
+          this.finish();
+          return;
+        }
+
+        this.updateDots();
+
+        this.setPhase('inhale', 'Inhala suavemente...', 4, () => {
+          if (!this.isRunning) return;
+          this.setPhase('hold', 'Mantén el aire...', 2, () => {
+            if (!this.isRunning) return;
+            this.setPhase('exhale', 'Suelta despacio...', 4, () => {
+              if (!this.isRunning) return;
+              this.currentCycle++;
+              this.runCycle();
+            });
+          });
+        });
+      }
+
+      setPhase(className, label, seconds, onComplete) {
+        this.arena.className = `breath-arena ${className}`;
+        this.phaseEl.textContent = label;
+        let remaining = seconds;
+        this.countEl.textContent = `${remaining}s`;
+
+        const interval = setInterval(() => {
+          if (!this.isRunning) {
+            clearInterval(interval);
+            return;
+          }
+          remaining--;
+          if (remaining > 0) {
+            this.countEl.textContent = `${remaining}s`;
+          } else {
+            clearInterval(interval);
+            onComplete();
+          }
+        }, 1000);
+      }
+
+      updateDots() {
+        this.dots.forEach((dot, idx) => {
+          dot.className = 'cycle-dot';
+          if (idx + 1 < this.currentCycle) {
+            dot.classList.add('completed');
+          } else if (idx + 1 === this.currentCycle) {
+            dot.classList.add('current');
+          }
+        });
+      }
+
+      finish() {
+        this.isRunning = false;
+        this.arena.className = 'breath-arena';
+        this.phaseEl.textContent = '¡Completado!';
+        this.countEl.textContent = 'Pulmones llenos de calma 🌿';
+        this.startBtn.innerHTML = '<span>Repetir respiración</span> 🌿';
+        this.dots.forEach(d => d.className = 'cycle-dot completed');
+        sound.playChime();
+        confetti.burst(40);
+        triggerHaptic(50);
+      }
+
+      reset() {
+        this.isRunning = false;
+        this.arena.className = 'breath-arena';
+        this.phaseEl.textContent = 'Preparada';
+        this.countEl.textContent = 'Pulsa empezar';
+        this.startBtn.innerHTML = '<span>Empezar respiración</span> 🌿';
+        this.dots.forEach((d, i) => {
+          d.className = i === 0 ? 'cycle-dot current' : 'cycle-dot';
+        });
+      }
+    }
+
+    /* ==========================================================================
+       ARENA DE COMBATE: BOSS FIGHT FLOTANTE CONTRA EL AGOBIO
+       ========================================================================== */
+    class StressBattleManager {
+      constructor() {
+        this.modal = document.getElementById('battleArenaModal');
+        this.field = document.getElementById('battleField');
+        this.monster = document.getElementById('floatingMonster');
+        this.monsterFace = document.getElementById('monsterFace');
+        this.monsterText = document.getElementById('monsterText');
+        
+        this.targetNameEl = document.getElementById('battleTargetName');
+        this.hpCountEl = document.getElementById('battleHpCount');
+        this.hpFillEl = document.getElementById('battleHpBarFill');
+        this.closeBtn = document.getElementById('closeBattleBtn');
+
+        this.victoryOverlay = document.getElementById('battleVictoryOverlay');
+        this.victoryDesc = document.getElementById('battleVictoryDesc');
+        this.btnNext = document.getElementById('btnNextFight');
+        this.btnFinish = document.getElementById('btnFinishFight');
+
+        this.totalHp = 7;
+        this.currentHp = 7;
+        this.currentAgobio = "";
+
+        this.posX = 100;
+        this.posY = 150;
+        this.velX = 1.6;
+        this.velY = 2.0;
+        this.animId = null;
+        this.isAlive = false;
+
+        this.comicHits = [
+          "¡TOMA!", "-1 HP", "¡ZAS!", "¡A LA PORRA!", "¡MUERE!", "¡FUERA!", "¡CRACK!", "💥", "¡BOOM!", "¡NO PUEDES CONMIGO!"
+        ];
+
+        this.initEvents();
+      }
+
+      initEvents() {
+        this.monster.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          this.hit(e);
+        });
+
+        this.closeBtn.addEventListener('click', () => this.close());
+        this.btnNext.addEventListener('click', () => {
+          this.close();
+          activatePauseTab('game');
+        });
+        this.btnFinish.addEventListener('click', () => {
+          this.close();
+          switchView('view-battery');
+        });
+      }
+
+      startFight(agobioName) {
+        sound.init();
+        this.currentAgobio = agobioName;
+        this.currentHp = this.totalHp;
+        this.isAlive = true;
+
+        this.targetNameEl.textContent = agobioName;
+        this.monsterText.textContent = agobioName;
+        this.monsterFace.textContent = "😈";
+
+        this.victoryOverlay.classList.remove('active');
+        this.monster.classList.remove('dying');
+        this.monster.style.opacity = '1';
+
+        this.updateHpBar();
+
+        this.modal.classList.add('active');
+        this.modal.setAttribute('aria-hidden', 'false');
+
+        const fieldRect = this.field.getBoundingClientRect();
+        this.posX = (fieldRect.width - 150) / 2;
+        this.posY = (fieldRect.height - 150) / 2;
+
+        this.velX = (Math.random() > 0.5 ? 1 : -1) * (1.6 + Math.random() * 0.8);
+        this.velY = (Math.random() > 0.5 ? 1 : -1) * (1.8 + Math.random() * 0.8);
+
+        this.renderPosition();
+        this.loop();
+      }
+
+      loop() {
+        if (!this.isAlive) return;
+
+        const fieldRect = this.field.getBoundingClientRect();
+        const monsterW = 150;
+        const monsterH = 150;
+        const maxW = fieldRect.width - monsterW - 10;
+        const maxH = fieldRect.height - monsterH - 10;
+
+        this.posX += this.velX;
+        this.posY += this.velY;
+
+        if (this.posX <= 10) {
+          this.posX = 10;
+          this.velX = Math.abs(this.velX);
+        } else if (this.posX >= maxW) {
+          this.posX = maxW;
+          this.velX = -Math.abs(this.velX);
+        }
+
+        if (this.posY <= 10) {
+          this.posY = 10;
+          this.velY = Math.abs(this.velY);
+        } else if (this.posY >= maxH) {
+          this.posY = maxH;
+          this.velY = -Math.abs(this.velY);
+        }
+
+        this.renderPosition();
+        this.animId = requestAnimationFrame(() => this.loop());
+      }
+
+      renderPosition() {
+        this.monster.style.left = `${this.posX}px`;
+        this.monster.style.top = `${this.posY}px`;
+      }
+
+      hit(e) {
+        if (!this.isAlive || this.currentHp <= 0) return;
+
+        sound.playPunch();
+        triggerHaptic([35, 20]);
+
+        this.currentHp--;
+        this.updateHpBar();
+
+        this.spawnDamageText(e.clientX, e.clientY);
+
+        this.monster.classList.remove('hit-recoil');
+        void this.monster.offsetWidth;
+        this.monster.classList.add('hit-recoil');
+
+        this.velX = (this.velX > 0 ? 1 : -1) * (2.2 + Math.random() * 1.5);
+        this.velY = (this.velY > 0 ? -1 : 1) * (2.2 + Math.random() * 1.5);
+
+        const hpRatio = this.currentHp / this.totalHp;
+        if (hpRatio > 0.6) {
+          this.monsterFace.textContent = "😈";
+        } else if (hpRatio > 0.3) {
+          this.monsterFace.textContent = "😣";
+        } else if (hpRatio > 0) {
+          this.monsterFace.textContent = "😵‍💫";
+        } else {
+          this.monsterFace.textContent = "☠️";
+          this.die();
+        }
+      }
+
+      spawnDamageText(clientX, clientY) {
+        const splash = document.createElement('div');
+        splash.className = 'damage-hit-splash';
+        const randomWord = this.comicHits[Math.floor(Math.random() * this.comicHits.length)];
+        splash.textContent = randomWord;
+
+        splash.style.left = `${clientX}px`;
+        splash.style.top = `${clientY}px`;
+
+        document.body.appendChild(splash);
+
+        setTimeout(() => {
+          splash.remove();
+        }, 600);
+      }
+
+      updateHpBar() {
+        const ratio = Math.max(0, this.currentHp / this.totalHp);
+        this.hpCountEl.textContent = `${this.currentHp} / ${this.totalHp} golpes`;
+        this.hpFillEl.style.width = `${ratio * 100}%`;
+
+        if (ratio > 0.5) {
+          this.hpFillEl.style.background = 'linear-gradient(90deg, #4A7C59, #E07A5F)';
+        } else if (ratio > 0.25) {
+          this.hpFillEl.style.background = 'linear-gradient(90deg, #F4A261, #E07A5F)';
+        } else {
+          this.hpFillEl.style.background = '#E07A5F';
+        }
+      }
+
+      die() {
+        this.isAlive = false;
+        cancelAnimationFrame(this.animId);
+
+        this.monster.classList.add('dying');
+        sound.playChime();
+        confetti.burst(90);
+        triggerHaptic([50, 100, 50]);
+
+        setTimeout(() => {
+          this.victoryDesc.innerHTML = `Te has cargado <strong>«${this.currentAgobio}»</strong> a base de insistencia y carácter. Tu mente manda aquí.`;
+          this.victoryOverlay.classList.add('active');
+        }, 480);
+      }
+
+      close() {
+        this.isAlive = false;
+        cancelAnimationFrame(this.animId);
+        this.modal.classList.remove('active');
+        this.modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    /* ==========================================================================
+       SELECTOR Y LISTADO DE AGOBIOS
+       ========================================================================== */
+    class StressSelectorManager {
+      constructor(battleManager) {
+        this.battleManager = battleManager;
+        this.cloudEl = document.getElementById('bubblesCloud');
+        this.counterEl = document.getElementById('gameCounter');
+        this.inputEl = document.getElementById('customStressInput');
+        this.addBtn = document.getElementById('addCustomStressBtn');
+
+        this.labels = [...DEFAULT_STRESS_LABELS];
+
+        this.initEvents();
+        this.render();
+      }
+
+      initEvents() {
+        this.addBtn.addEventListener('click', () => this.addAndFight());
+        this.inputEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            this.addAndFight();
+          }
+        });
+      }
+
+      addAndFight() {
+        const text = this.inputEl.value.trim();
+        if (!text) return;
+
+        this.labels.unshift(`⚡ ${text}`);
+        this.inputEl.value = '';
+        this.render();
+
+        this.battleManager.startFight(text);
+      }
+
+      render() {
+        this.cloudEl.innerHTML = '';
+        this.counterEl.textContent = `${this.labels.length} agobios listos`;
+
+        this.labels.forEach((label) => {
+          const bubble = document.createElement('div');
+          bubble.className = 'stress-bubble';
+          bubble.innerHTML = `${label} <span class="bubble-badge-fight">Luchar 🥊</span>`;
+          bubble.title = 'Toca para iniciar combate contra este agobio';
+
+          bubble.addEventListener('click', () => {
+            sound.playPop();
+            triggerHaptic(20);
+            this.battleManager.startFight(label);
+          });
+
+          this.cloudEl.appendChild(bubble);
+        });
+      }
+    }
+
+    /* ==========================================================================
+       5. POMODORO EXPRESS
+       ========================================================================== */
+    class PomodoroTimer {
+      constructor() {
+        this.digitsEl = document.getElementById('timerDigits');
+        this.statusLabel = document.getElementById('timerStatusLabel');
+        this.quoteEl = document.getElementById('pomodoroQuote');
+        this.circleEl = document.getElementById('timerProgressCircle');
+        this.toggleBtn = document.getElementById('btnTimerToggle');
+        this.toggleBtnText = document.getElementById('btnTimerToggleText');
+        this.resetBtn = document.getElementById('btnTimerReset');
+        this.presetBtns = document.querySelectorAll('.preset-btn');
+
+        this.totalDuration = 25 * 60;
+        this.timeLeft = this.totalDuration;
+        this.timerId = null;
+        this.isRunning = false;
+
+        this.circumference = 2 * Math.PI * 90;
+        this.circleEl.style.strokeDasharray = `${this.circumference}`;
+        this.circleEl.style.strokeDashoffset = '0';
+
+        this.initEvents();
+        this.render();
+      }
+
+      initEvents() {
+        this.toggleBtn.addEventListener('click', () => this.toggle());
+        this.resetBtn.addEventListener('click', () => this.reset());
+
+        this.presetBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (this.isRunning) this.pause();
+            this.presetBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const mins = parseInt(btn.dataset.minutes, 10);
+            this.totalDuration = mins * 60;
+            this.timeLeft = this.totalDuration;
+            this.statusLabel.textContent = 'Listo';
+            this.render();
+          });
+        });
+      }
+
+      toggle() {
+        sound.init();
+        if (this.isRunning) {
+          this.pause();
+        } else {
+          this.start();
+        }
+      }
+
+      start() {
+        this.isRunning = true;
+        this.toggleBtnText.textContent = 'Pausar';
+        this.statusLabel.textContent = 'En foco';
+        this.quoteEl.textContent = `Venga, concéntrate mi amor; yo estoy aquí cerquita pensando en ti.`;
+
+        this.timerId = setInterval(() => {
+          this.timeLeft--;
+          this.render();
+
+          if (this.timeLeft <= 0) {
+            this.complete();
+          }
+        }, 1000);
+      }
+
+      pause() {
+        this.isRunning = false;
+        clearInterval(this.timerId);
+        this.toggleBtnText.textContent = 'Reanudar';
+        this.statusLabel.textContent = 'Pausado';
+        this.quoteEl.textContent = `Pausa merecida. Estira los brazos, bebe agua y seguimos cuando quieras.`;
+      }
+
+      reset() {
+        this.pause();
+        this.timeLeft = this.totalDuration;
+        this.toggleBtnText.textContent = 'Empezar';
+        this.statusLabel.textContent = 'A tu ritmo';
+        this.quoteEl.textContent = `Dale al play, ponte música tranquila y yo me quedo aquí contigo en la distancia.`;
+        this.render();
+      }
+
+      complete() {
+        clearInterval(this.timerId);
+        this.isRunning = false;
+        this.timeLeft = 0;
+        this.render();
+        this.statusLabel.textContent = '¡Hecho!';
+        this.quoteEl.textContent = `¡Bloque superado con matrícula! Levántate, desconecta y date una palmadita en la espalda. Eres una máquina.`;
+        this.toggleBtnText.textContent = 'Empezar';
+
+        sound.playChime();
+        confetti.burst(90);
+        triggerHaptic([50, 100, 50]);
+      }
+
+      render() {
+        const mins = Math.floor(this.timeLeft / 60);
+        const secs = this.timeLeft % 60;
+        this.digitsEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        const progress = this.timeLeft / this.totalDuration;
+        const offset = this.circumference * (1 - progress);
+        this.circleEl.style.strokeDashoffset = offset;
+      }
+    }
+
+    /* ==========================================================================
+       6. VALES DE RESCATE
+       ========================================================================== */
+    class VoucherManager {
+      constructor(vouchers) {
+        this.vouchers = vouchers;
+        this.listEl = document.getElementById('vouchersList');
+        this.storageKey = 'rescate_vales_canjeados';
+        this.redeemedIds = this.loadRedeemed();
+
+        this.render();
+      }
+
+      loadRedeemed() {
+        try {
+          const raw = localStorage.getItem(this.storageKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      saveRedeemed() {
+        try {
+          localStorage.setItem(this.storageKey, JSON.stringify(this.redeemedIds));
+        } catch (e) {}
+      }
+
+      resetAll() {
+        this.redeemedIds = [];
+        this.saveRedeemed();
+        this.render();
+      }
+
+      render() {
+        this.listEl.innerHTML = '';
+
+        this.vouchers.forEach(v => {
+          const isRedeemed = this.redeemedIds.includes(v.id);
+          const card = document.createElement('article');
+          card.className = `voucher-ticket ${isRedeemed ? 'redeemed' : ''}`;
+          card.id = v.id;
+
+          card.innerHTML = `
+            <div class="stamp-badge">CANJEADO ✨</div>
+            <div class="ticket-body">
+              <span class="ticket-type">${v.type}</span>
+              <h3 class="ticket-title">${v.title}</h3>
+              <p class="ticket-desc">${v.desc}</p>
+            </div>
+            <div class="ticket-divider">
+              <span class="ticket-notch-left"></span>
+              <span class="ticket-notch-right"></span>
+            </div>
+            <div class="ticket-footer">
+              <span class="ticket-meta">CÓDIGO: ${v.code}</span>
+              <button class="redeem-btn" data-id="${v.id}">
+                ${isRedeemed ? 'Canjeado ✓ (Haz captura)' : 'Canjear vale 🎟️'}
+              </button>
+            </div>
+          `;
+
+          const btn = card.querySelector('.redeem-btn');
+          btn.addEventListener('click', () => this.redeem(v.id, card, btn));
+
+          this.listEl.appendChild(card);
+        });
+      }
+
+      redeem(id, cardEl, btnEl) {
+        if (this.redeemedIds.includes(id)) return;
+
+        sound.playChime();
+        confetti.burst(60);
+        triggerHaptic([40, 80, 40]);
+
+        this.redeemedIds.push(id);
+        this.saveRedeemed();
+
+        cardEl.classList.add('redeemed');
+        btnEl.textContent = 'Canjeado ✓ (Haz captura)';
+      }
+    }
+
+    /* ==========================================================================
+       SISTEMA DE PESTAÑAS Y NAVEGACIÓN
+       ========================================================================== */
+    function switchView(targetId) {
+      const views = document.querySelectorAll('.section-view');
+      const batteryCard = document.getElementById('batterySection');
+      const navItems = document.querySelectorAll('.nav-item');
+
+      if (targetId === 'view-battery') {
+        batteryCard.style.display = 'block';
+        views.forEach(v => v.classList.remove('active'));
+      } else {
+        batteryCard.style.display = 'none';
+        views.forEach(v => {
+          if (v.id === targetId) {
+            v.classList.add('active');
+          } else {
+            v.classList.remove('active');
+          }
+        });
+      }
+
+      navItems.forEach(item => {
+        if (item.dataset.target === targetId) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function initNavigation() {
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sound.playPop();
+          triggerHaptic(15);
+          switchView(item.dataset.target);
+        });
+      });
+
+      document.getElementById('btnTabBreathing').addEventListener('click', () => {
+        sound.playPop();
+        activatePauseTab('breathing');
+      });
+
+      document.getElementById('btnTabGame').addEventListener('click', () => {
+        sound.playPop();
+        activatePauseTab('game');
+      });
+
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundIcon = document.getElementById('soundIcon');
+      soundToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isEnabled = sound.toggle();
+        soundIcon.textContent = isEnabled ? '🔊' : '🔇';
+        soundToggleBtn.title = isEnabled ? 'Sonido activado' : 'Sonido silenciado';
+        triggerHaptic(15);
+      });
+    }
+
+    /* ==========================================================================
+       INICIALIZACIÓN
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroTitle = document.getElementById('heroTitle');
+      if (heroTitle && GIRLFRIEND_NAME) {
+        heroTitle.textContent = `Para ${GIRLFRIEND_NAME} ❤️`;
+      }
+      const cheerAuthor = document.querySelector('.cheer-author-tag');
+      if (cheerAuthor && BOYFRIEND_NAME) {
+        cheerAuthor.textContent = `— ${BOYFRIEND_NAME}, tu mayor fan nº 1`;
+      }
+
+      initCountdown();
+      initBattery();
+      new CheerDeck(CHEER_MESSAGES);
+      new BreathingGuide();
+
+      const battleManager = new StressBattleManager();
+      new StressSelectorManager(battleManager);
+
+      new PomodoroTimer();
+
+      const voucherManager = new VoucherManager(RESCUE_VOUCHERS);
+      const resetVouchersBtn = document.getElementById('resetVouchersBtn');
+      if (resetVouchersBtn) {
+        resetVouchersBtn.addEventListener('click', () => {
+          if (confirm('¿Quieres desmarcar los vales para poder canjearlos de nuevo?')) {
+            voucherManager.resetAll();
+          }
+        });
+      }
+
+      initNavigation();
+    });
+  </script>
+</body>
+</html>
